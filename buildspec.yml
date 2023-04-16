@@ -12,7 +12,7 @@ phases:
       - apt-get update && apt-get install -y zip
   pre_build:
     commands:
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - $(aws ecr get-login-password --region us-east-1 $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest)
   build:
     commands:
       - docker build -t $IMAGE_REPO_NAME .
