@@ -1,18 +1,22 @@
 version: 0.2
 
+env:
+  variables:
+    IMAGE_REPO_NAME: "coworking-space"
+    AWS_DEFAULT_REGION: "us-east-1"
+    AWS_ACCOUNT_ID: "585237819899"
+
 phases:
+  install:
+    runtime-versions:
+      docker: 18
   pre_build:
     commands:
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
-      - docker build -t $ECR_REPOSITORY_URI .
-      - docker tag $ECR_REPOSITORY_URI:latest $ECR_REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker build -t $IMAGE_REPO_NAME .
+      - docker tag $IMAGE_REPO_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
   post_build:
     commands:
-      - docker push $ECR_REPOSITORY_URI:latest
-      - docker push $ECR_REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
-
-artifacts:
-  files:
-    - '**/*'
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
