@@ -1,5 +1,10 @@
 version: 0.2
 
+env:
+  variables:
+    AWS_DEFAULT_REGION: "us-east-1"
+    ECR_REPOSITORY: "585237819899.dkr.ecr.us-east-1.amazonaws.com/coworking-space"
+
 phases:
   pre_build:
     commands:
