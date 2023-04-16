@@ -14,7 +14,7 @@ phases:
     - echo Logging in to Amazon ECR...
     - ECR_REGISTRY=$(aws ecr describe-repositories --repository-names $IMAGE_REPO_NAME --region us-east-1 | jq -r ".repositories[0].registryId").dkr.ecr.us-east-1.amazonaws.com
     - DOCKER_LOGIN_COMMAND=$(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REGISTRY)
-    - echo ECR_REGISTRY
+    - echo $ECR_REGISTRY
     - if [ $? -ne 0 ]; then echo "Failed to execute docker login command"; exit 1; fi
   build:
     commands:
