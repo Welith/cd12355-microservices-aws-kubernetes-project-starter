@@ -1,29 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+  name: coworking-space
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-app
+      app: coworking-space
   template:
     metadata:
       labels:
-        app: my-app
+        app: coworking-space
     spec:
-      containers:
-        - name: coworking-space
-          image: 585237819899.dkr.ecr.us-east-1.amazonaws.com/coworking-space:latest
-          ports:
-            - containerPort: 80
-          imagePullPolicy: Always
-          volumeMounts:
-            - name: ecr-registry-volume
-              mountPath: /root/.docker/
       imagePullSecrets:
-        - name: ecr-registry-secret
-      volumes:
-        - name: ecr-registry-volume
-          secret:
-            secretName: ecr-registry-secret
+      - name: aws-ecr-secret
+      containers:
+      - name: coworking-space
+        image: 585237819899.dkr.ecr.us-east-1.amazonaws.com/coworking-space:latest
+        ports:
+        - containerPort: 5153
