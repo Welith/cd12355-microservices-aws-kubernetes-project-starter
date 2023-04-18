@@ -13,7 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code to the working directory
 COPY analytics/. .
 
-
 # Expose port 5153
 EXPOSE 5153
 
