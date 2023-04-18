@@ -10,6 +10,8 @@ RUN amazon-linux-extras install epel -y && \
     alternatives --set python3 /usr/bin/python3.9 && \
     yum clean all
 
+ENV PATH="/usr/bin:${PATH}"
+
 # Set the working directory
 WORKDIR /app
 
