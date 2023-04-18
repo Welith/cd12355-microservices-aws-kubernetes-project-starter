@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coworking-space
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coworking-space
+  template:
+    metadata:
+      labels:
+        app: coworking-space
+    spec:
+      containers:
+        - name: coworking-space
+          image: 585237819899.dkr.ecr.us-east-1.amazonaws.com/coworking-space:latest
+          ports:
+            - containerPort: 5153
+          env:
+            - name: DB_USER
+              value: "app1"
+            - name: DB_PASSWORD
+              value: "AppPassword"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coworking-space
+spec:
+  selector:
+    app: coworking-space
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5153
+  type: LoadBalancer
