@@ -1,11 +1,14 @@
 # Base image
-FROM public.ecr.aws/amazonlinux/amazonlinux:2
+FROM amazonlinux:2
 
-RUN yum install -y amazon-linux-extras
-
-# Install Python 3.9 and other required packages
-RUN amazon-linux-extras install python3.9 && \
-    yum install -y python3.9-libs python3.9-devel python3.9-pip
+# Install required packages
+RUN amazon-linux-extras install epel -y && \
+    yum update -y && \
+    yum install -y python3-pip python3.9 python3.9-libs python3.9-devel && \
+    alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 10 && \
+    alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 20 && \
+    alternatives --set python3 /usr/bin/python3.9 && \
+    yum clean all
 
 # Set the working directory
 WORKDIR /app
