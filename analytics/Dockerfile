@@ -1,5 +1,9 @@
 # Base image
-FROM python:3.9-slim-buster
+FROM public.ecr.aws/amazonlinux/amazonlinux:2
+
+# Install Python 3.9 and other required packages
+RUN amazon-linux-extras install python3.9 && \
+    yum install -y python3.9-libs python3.9-devel python3.9-pip
 
 # Set the working directory
 WORKDIR /app
@@ -8,7 +12,7 @@ WORKDIR /app
 COPY analytics/requirements.txt .
 
 # Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code to the working directory
 COPY analytics/. .
@@ -20,4 +24,4 @@ ENV DB_USER=""
 ENV DB_PASSWORD=""
 
 # Start the Flask application
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]

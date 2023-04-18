@@ -1,3 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-creds
+type: Opaque
+data:
+  db_user: YXBwMQ==
+  db_password: QXBwUGFzc3dvcmQ=
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,13 +24,19 @@ spec:
       containers:
         - name: coworking-space
           image: 585237819899.dkr.ecr.us-east-1.amazonaws.com/coworking-space:latest
+          env:
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-creds
+                key: db_user
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-creds
+                key: db_password
           ports:
             - containerPort: 5153
-          env:
-            - name: DB_USER
-              value: "app1"
-            - name: DB_PASSWORD
-              value: "AppPassword"
 ---
 apiVersion: v1
 kind: Service
