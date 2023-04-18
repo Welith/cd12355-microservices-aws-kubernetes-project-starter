@@ -1,6 +1,8 @@
 # Base image
 FROM public.ecr.aws/amazonlinux/amazonlinux:2
 
+RUN yum install -y amazon-linux-extras
+
 # Install Python 3.9 and other required packages
 RUN amazon-linux-extras install python3.9 && \
     yum install -y python3.9-libs python3.9-devel python3.9-pip
