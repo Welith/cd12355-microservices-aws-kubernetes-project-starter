@@ -16,5 +16,8 @@ COPY analytics/. .
 # Expose port 5153
 EXPOSE 5153
 
+ENV DB_USER=""
+ENV DB_PASSWORD=""
+
 # Start the Flask application
 CMD ["python", "app.py"]
