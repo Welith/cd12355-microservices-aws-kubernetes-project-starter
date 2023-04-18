@@ -19,11 +19,11 @@ COPY analytics/requirements.txt .
 # Install the dependencies
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code to the working directory
+# Copy the rest of the application code to the working directorys
 COPY analytics/. .
 
 
-# Expose port 5153
+# Expose port 5153ds
 EXPOSE 5153
 
 ENV DB_USER=""
