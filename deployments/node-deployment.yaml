@@ -25,7 +25,7 @@ spec:
         - name: coworking-space
           image: 585237819899.dkr.ecr.us-east-1.amazonaws.com/coworking-space:latest
           env:
-          - name: DB_USER
+          - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
                 name: db-creds
@@ -37,6 +37,7 @@ spec:
                 key: db_password
           ports:
             - containerPort: 5153
+          args: ["python", "app.py"]
 ---
 apiVersion: v1
 kind: Service
