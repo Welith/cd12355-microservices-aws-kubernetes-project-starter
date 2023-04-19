@@ -1,12 +1,5 @@
 # Base image
-FROM amazonlinux:2
-
-# Install required packages
-RUN amazon-linux-extras install epel -y && \
-    yum update -y && \
-    yum install -y python3-pip python3.9 python3.9-libs python3.9-devel
-
-ENV PATH="/usr/bin:${PATH}"
+FROM python:latest
 
 # Set the working directory
 WORKDIR /app
@@ -17,10 +10,10 @@ COPY analytics/requirements.txt .
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code to the working directorys
+# Copy the rest of the application code to the working directory
 COPY analytics/. .
 
-# Expose port 5153dss
+# Expose port 5153
 EXPOSE 5153
 
 ENV DB_USER=""
