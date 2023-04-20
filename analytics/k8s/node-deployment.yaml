@@ -13,7 +13,7 @@ spec:
         app: coworking
     spec:
       containers:
-        - name: coworking-space
+        - name: coworking
           image: 585237819899.dkr.ecr.us-east-1.amazonaws.com/coworking:latest
           env:
           - name: APP_PORT
