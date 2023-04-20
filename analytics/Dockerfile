@@ -1,23 +1,24 @@
-# Base image
-FROM python:latest
 
-# Set the working directory
+FROM public.ecr.aws/docker/library/python:3.11-alpine
+
+ENV FLASK_RUN_HOST=0.0.0.0
+
 WORKDIR /app
 
-# Copy the requirements file to the working directory
-COPY analytics/requirements.txt .
+RUN apk update && \
+    apk add \
+    pcre \
+    pcre-dev \
+    build-base \
+    gcc \
+    linux-headers \
+    openssl \
+    libffi-dev
 
-# Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt .
 
-# Copy the rest of the application code to the working directory
-COPY analytics/. .
+RUN pip install -r requirements.txt
 
-# Expose port 5153
-EXPOSE 5153
+COPY . .
 
-ENV DB_USERNAME=""
-ENV DB_PASSWORD=""
-
-# Start the Flask application
-CMD ["python", "app.py"]
+CMD python app.py
