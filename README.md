@@ -191,14 +191,16 @@ This will deploy the application which will be accessible on:
 
 ### Deliverables
 1. [`Dockerfile`](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/analytics/Dockerfile)
-2. Screenshot of AWS CodeBuild pipeline
-3. Screenshot of AWS ECR repository for the application's repository
-4. Screenshot of `kubectl get svc`
-5. Screenshot of `kubectl get pods`
-6. Screenshot of `kubectl describe svc <DATABASE_SERVICE_NAME>`
-7. Screenshot of `kubectl describe deployment <SERVICE_NAME>`
-8. All Kubernetes config files used for deployment (ie YAML files)
-9. Screenshot of AWS CloudWatch logs for the application
-10. `README.md` file in your solution that serves as documentation for your user to detail how your deployment process works and how the user can deploy changes. The details should not simply rehash what you have done on a step by step basis. Instead, it should help an experienced software developer understand the technologies and tools in the build and deploy process as well as provide them insight into how they would release new builds.
+2. [Screenshot of AWS CodeBuild pipeline](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/required_screenshots/code_builder_success.png)
+3. [Screenshot of AWS ECR repository for the application's repository](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/required_screenshots/ecr_repo.png)
+4. [Image in ECR](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/required_screenshots/pushed_to_ecr.png)
+5. [Screenshot of `kubectl get svc`](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/required_screenshots/get_svc.png)
+6. [Screenshot of `kubectl get pods`](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/required_screenshots/get_pods.png)
+7. [Screenshot of `kubectl describe svc postgresql`](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/required_screenshots/psql_svc_describe.png)
+8. [Screenshot of `kubectl describe svc coworking`](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/required_screenshots/get_svc_coworking.png)
+9. [Screenshot of `kubectl describe deployment coworking`](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/required_screenshots/describe_deployment_coworking.png)
+10. [All Kubernetes config files used for deployment (ie YAML files)](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/analytics/k8s/node-deployment.yaml)
+11. [Screenshot of AWS CloudWatch logs for the application](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/required_screenshots/cloudwatch.png)
+12. [`README.md`](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/main/README.md)
 
 
