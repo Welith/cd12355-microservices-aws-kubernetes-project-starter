@@ -50,7 +50,7 @@ export AWS_CONFIG_FILE=~/.aws/config
 #### 2. Create the infrastructure
 I have tried two approaches here, first by manually creating the infrastructure, however, I decided that using `terraform` will be easier for other developers to re-create it.
 
-In order to create the infrastructure you need to `cd deployments/terraform`. You will need to update the GitHub [location](https://github.com/Welith/cd12354-Movie-Picture-Pipeline/blob/0857d230c4498f7bacc2bafeeafdbcf48569d1d7/setup/terraform/main.tf#L278) line with your GitHub repository (also, change the `terraform` [version](https://github.com/Welith/cd12354-Movie-Picture-Pipeline/blob/0857d230c4498f7bacc2bafeeafdbcf48569d1d7/setup/terraform/versions.tf#L6) if you have installed a different one). Now, presuming you have installed `terraform` locally, you need to run `terraform init` to set-up your backend. Afterwards, you need to run `terraform apply`, which will deploy the following AWS components:
+In order to create the infrastructure you need to `cd deployment/terraform`. You will need to update the GitHub [location](https://github.com/Welith/cd12354-Movie-Picture-Pipeline/blob/0857d230c4498f7bacc2bafeeafdbcf48569d1d7/setup/terraform/main.tf#L278) line with your GitHub repository (also, change the `terraform` [version](https://github.com/Welith/cd12354-Movie-Picture-Pipeline/blob/0857d230c4498f7bacc2bafeeafdbcf48569d1d7/setup/terraform/versions.tf#L6) if you have installed a different one). Now, presuming you have installed `terraform` locally, you need to run `terraform init` to set-up your backend. Afterwards, you need to run `terraform apply`, which will deploy the following AWS components:
 
 - EKS Cluster (with a name of `cluster`)
 - ECR (repo with a name `coworking`)
@@ -63,7 +63,7 @@ This will set your `kubectl` commands to directly communicate with the newly cre
 
 #### 4. Set-up the Bitnami Help Repo
 
-In order to properly set-up the Helm repo, I created a local `PersistentVolume`, which requires to configure the internal DNS of the kubernetes cluster. In order to do so you will need to update [this](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/1313925604ddefc9afebc7530be890c01c3c697d/deployments/local-pv.yaml#L29) confiugration with the output of the following command:
+In order to properly set-up the Helm repo, I created a local `PersistentVolume`, which requires to configure the internal DNS of the kubernetes cluster. In order to do so you will need to update [this](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/1313925604ddefc9afebc7530be890c01c3c697d/deployment/local-pv.yaml#L29) confiugration with the output of the following command:
 
 `kubectl get nodes -o jsonpath='{ $.items[*].status.addresses[?(@.type=="InternalDNS")].address }`
 
@@ -111,7 +111,7 @@ This can be done automatically, by pushing your changes to GitHub (as the CodeBu
 
 #### 7. Deploy the coworking application
 
-Now, all thats left is to deploy the acutal application to the cluster. In order to do so, you will need to change the [repo name](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/1313925604ddefc9afebc7530be890c01c3c697d/analytics/k8s/node-deployment.yaml#L17) with you own. Now run the following command, after `cd analytics\k8s`:
+Now, all thats left is to deploy the acutal application to the cluster. In order to do so, you will need to change the [repo name](https://github.com/Welith/cd12355-microservices-aws-kubernetes-project-starter/blob/1313925604ddefc9afebc7530be890c01c3c697d/analytics/k8s/node-deployment.yaml#L17) with you own. Now run the following command, after `cd deployment\k8s`:
 
 `kubectl apply -f node-deployment.yaml`
 
